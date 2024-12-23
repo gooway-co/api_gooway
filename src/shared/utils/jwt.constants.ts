@@ -1,0 +1,7 @@
+export const AUTH_CONSTANTS = {
+    expiresIn: "3h",
+    REFRESH_JWT_SECRET: 'REFRESH_JWT_SECRET',
+    JWT_SECRET: 'JWT_SECRETSIMASOTF123',
+
+};
+ 

@@ -1,0 +1,21 @@
+version: '3.3'
+
+services:
+    api-turismo:
+        container_name: api-turismo
+        image: api-turismo:latest
+        build:
+            context: .
+            dockerfile: ./Dockerfile
+        command: npm run start:prod
+        ports:
+            - 3000:3000
+        networks:
+            - ms-network
+        volumes:
+            - .:/usr/src/app
+            - /usr/src/app/node_modules
+        restart: unless-stopped
+networks:
+    ms-network:
+      external: true
