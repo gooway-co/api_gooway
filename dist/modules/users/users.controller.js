@@ -30,8 +30,6 @@ let UsersController = class UsersController {
         return await this.userSevices.registerUserAdmin(userDtoAdmin);
     }
     async createCategori(userDTO, file, idUsuario) {
-        console.log("data ", userDTO);
-        console.log("idUsuario ", idUsuario);
         userDTO.avatar = file;
         return await this.userSevices.uploadAvatar(userDTO, idUsuario);
     }

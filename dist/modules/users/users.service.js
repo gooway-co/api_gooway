@@ -29,7 +29,6 @@ let UsersService = class UsersService {
         try {
             let email = userDto.email.toLocaleLowerCase().replace(" ", "");
             const responseUser = await this.usersModel.find({ email });
-            console.log("paso la validación");
             if (responseUser.length) {
                 return {
                     data: [],
@@ -43,7 +42,6 @@ let UsersService = class UsersService {
             userDto.phone = "";
             const response = new this.usersModel(userDto);
             await response.save();
-            console.log("users response ", response);
             if (response) {
                 const filteredResponse = await this.usersModel
                     .findById(response._id)
@@ -142,7 +140,6 @@ let UsersService = class UsersService {
     async uploadAvatar(userDTO, idUsuario) {
         try {
             const response = await this.usersModel.find({ _id: new mongoose_2.mongo.ObjectId(idUsuario), status: 'ACTIVE' });
-            console.log("response ", response);
             if (response.length > 0) {
                 const data = await this.uploadImagesToS3(userDTO.avatar, response[0]);
                 console.log("data respuesta ", data);

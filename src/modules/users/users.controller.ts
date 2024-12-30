@@ -28,8 +28,6 @@ export class UsersController {
     @UseInterceptors(FileInterceptor('avatar'))
     @Put("/uploadAvatar/:idUsuario")
     async createCategori(@Body() userDTO: UserDTO, @UploadedFile() file: Express.Multer.File, @Param('idUsuario') idUsuario) {
-        console.log("data ", userDTO);
-        console.log("idUsuario ", idUsuario);
         userDTO.avatar = file;
         return await this.userSevices.uploadAvatar(userDTO, idUsuario);
     }

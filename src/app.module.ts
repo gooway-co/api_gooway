@@ -12,6 +12,7 @@ import { FavoriteModule } from './modules/favorite/favorite.module';
 import { EventModule } from './modules/event/event.module';
 import { DeviceUserModule } from './modules/device-user/device-user.module';
 import { CitiesModule } from './modules/cities/cities.module';
+import { EmailsModule } from './modules/email/email.module';
 
 const ENV = process.env.NODE_ENV;
 
@@ -30,7 +31,8 @@ const ENV = process.env.NODE_ENV;
     FavoriteModule,
     EventModule,
     DeviceUserModule,
-    CitiesModule
+    CitiesModule,
+    EmailsModule
   ],
   controllers: [AppController],
   providers: [AppService],

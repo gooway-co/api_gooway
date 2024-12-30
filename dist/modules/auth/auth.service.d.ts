@@ -17,4 +17,10 @@ export declare class AuthService {
     validateToken(token: string): Promise<boolean>;
     validateUserToken(request: any): Promise<any>;
     extractTokenFromHeader(request: Request): string | undefined;
+    recoverPassword(email: string): Promise<IResponse>;
+    validateUserByEmail(email: string): Promise<import("mongoose").Document<unknown, {}, UserDocument> & User & Document & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v: number;
+    }>;
 }

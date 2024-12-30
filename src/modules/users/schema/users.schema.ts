@@ -45,7 +45,7 @@ export class User {
     @Prop({ required: true })
     status: string;
 
-    @Prop({ required: true })
+    @Prop({ required: false })
     city: string;
 
     @Prop({ required: true })

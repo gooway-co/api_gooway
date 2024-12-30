@@ -13,4 +13,9 @@ export class AuthController {
     async createPost(@Body() authDTO: AuthDTO){
         return await this.authService.login(authDTO);
     }
+
+    @Post('/recoverPassword')
+    async recoverPassword(@Body() authDTO: AuthDTO){
+        return await this.authService.login(authDTO);
+    }
 }

@@ -99,4 +99,42 @@ export class AuthService {
     const [type, token] = request.headers.authorization?.split(' ') ?? [];
     return type === 'Bearer' ? token : undefined;
   }
+
+  async recoverPassword(email: string): Promise<IResponse> {
+
+    try {
+      let emailReplace = email.toLocaleLowerCase().replace(" ", "");
+  
+      const user = await this.usersModel.findOne({ email: emailReplace });
+
+      if(!user){
+        return {
+          data: [],
+          menssage: "El usuario no se encuantra registrado.",
+          status: 400
+        };
+      }
+
+ 
+      
+      return {
+        data: [user],
+        menssage: "Login exitoso",
+        status: 200
+      };
+    } catch( error) {
+      return {
+        data: [],
+        menssage: error.response.message,
+        status: 401
+      };
+    }
+   
+  }
+
+  async validateUserByEmail(email: string) {
+    return await this.usersModel.findOne({ email: email });
+  }
+
+  
 }
