@@ -28,8 +28,9 @@ let EmailsController = class EmailsController {
     async sendPageWeb(body) {
         return await this.emailSevices.sendPageWeb('simasoftw@gmail.com', 'Solicitud Pagina Web', '../templates/templateMail', { name: body.name, email: body.email, message: body.message, phone: body.phone });
     }
-    async validateCodeOTP(body, request) {
-        return await this.emailSevices.validateCodeOTP(body.code, request);
+    async validateCodeOTP(body) {
+        console.log("estro en validateCodeOTP");
+        return await this.emailSevices.validateCodeOTP(body);
     }
     async forgottenPassword(body, request) {
         let code;
@@ -56,9 +57,8 @@ __decorate([
 __decorate([
     (0, common_1.Post)('validateCodeOTP'),
     __param(0, (0, common_1.Body)()),
-    __param(1, (0, common_1.Request)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], EmailsController.prototype, "validateCodeOTP", null);
 __decorate([

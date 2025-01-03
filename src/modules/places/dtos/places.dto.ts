@@ -49,6 +49,6 @@ export class PlaceDTO {
     address: string;
 
 
-    @IsNotEmpty()
-    companyId: string;
+    //@IsNotEmpty()
+    //companyId: string;
 }

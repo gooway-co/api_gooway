@@ -39,7 +39,7 @@ let PlaceService = class PlaceService {
             if (datos.images &&
                 Array.isArray(datos.images) &&
                 datos.images.length > 0) {
-                await this.uploadImagesToS3(datos.images, datos.audio, response);
+                await this.uploadImagesToS3(datos.images, response);
             }
             if (response) {
                 return {
@@ -95,7 +95,6 @@ let PlaceService = class PlaceService {
     async filterPlaceByCompany(body) {
         try {
             const response = await this._placesModel.find({
-                companyId: new mongoose_1.mongo.ObjectId(body.companyId),
                 status: 'ACTIVE',
             });
             if (response.length) {
@@ -148,22 +147,10 @@ let PlaceService = class PlaceService {
             };
         }
     }
-    async uploadImagesToS3(files, audio, responseData) {
-        let audioBuffer = `data:audio/mp3;base64,${audio}`;
-        let audioS3 = this.convertBase64ToBuffer(audioBuffer, "audio.mp3", "audio/mp3");
+    async uploadImagesToS3(files, responseData) {
         let arrayImages = [];
-        let audioUrl = "";
-        if (audio) {
-            const audioKey = `places/${responseData._id}/audio/${audioS3.originalname}`;
-            const audioCommand = new client_s3_1.PutObjectCommand({
-                Bucket: this.bucketName,
-                Key: audioKey,
-                Body: audioS3.buffer,
-                ContentType: audioS3.mimetype,
-            });
-            audioUrl = await this.s3.send(audioCommand).then((response) => {
-                return `https://${this.bucketName}.s3.amazonaws.com/${audioKey}`;
-            });
+        if (files == null || files == undefined) {
+            return;
         }
         const uploadPromises = files.map((file) => {
             const key = `places/${responseData._id}/img/${file.originalname}`;
@@ -180,7 +167,7 @@ let PlaceService = class PlaceService {
             });
         });
         arrayImages = await Promise.all(uploadPromises);
-        await this._placesModel.updateOne({ _id: responseData._id }, { imagesUrl: arrayImages, audio: audioUrl });
+        await this._placesModel.updateOne({ _id: responseData._id }, { imagesUrl: arrayImages });
         arrayImages = [...arrayImages];
         return arrayImages;
     }

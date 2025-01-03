@@ -42,7 +42,7 @@ export class PlaceController {
         return await this._placesService.delete(IdPlace);
     }
 
-    @Post("/findbyCompany")
+    @Get("/listar")
     async findByCompany (@Body() categoriDTO: PlaceDTO) { 
         return await this._placesService.filterPlaceByCompany(categoriDTO);
     }

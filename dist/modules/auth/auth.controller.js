@@ -26,6 +26,9 @@ let AuthController = class AuthController {
     async recoverPassword(authDTO) {
         return await this.authService.login(authDTO);
     }
+    async changePassword(body) {
+        return await this.authService.changePassword(body);
+    }
 };
 exports.AuthController = AuthController;
 __decorate([
@@ -42,6 +45,13 @@ __decorate([
     __metadata("design:paramtypes", [usuarios_dto_1.AuthDTO]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "recoverPassword", null);
+__decorate([
+    (0, common_1.Post)('/changePassword'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "changePassword", null);
 exports.AuthController = AuthController = __decorate([
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])

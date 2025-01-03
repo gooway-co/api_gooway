@@ -74,8 +74,4 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], PlaceDTO.prototype, "address", void 0);
-__decorate([
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], PlaceDTO.prototype, "companyId", void 0);
 //# sourceMappingURL=places.dto.js.map

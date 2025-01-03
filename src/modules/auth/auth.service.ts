@@ -1,6 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from "@nestjs/mongoose";
-import { Model } from "mongoose";
+import { Model, mongo } from "mongoose";
 import { JwtService } from '@nestjs/jwt';
 import { AuthDTO } from './dtos/usuarios.dto';
 import { User, UserDocument } from '../users/schema/users.schema';
@@ -114,8 +114,6 @@ export class AuthService {
           status: 400
         };
       }
-
- 
       
       return {
         data: [user],
@@ -136,5 +134,41 @@ export class AuthService {
     return await this.usersModel.findOne({ email: email });
   }
 
-  
+  async changePassword(data: any): Promise<any>  {
+
+    try{
+       
+      const authResponse = await this.usersModel.findOne({_id: new mongo.ObjectId(data.id), status: 'ACTIVE'});
+
+      if(authResponse == null) {
+        return {
+          menssage: `Usuario no encontrado`,
+          data: [],
+          status: 400
+        };
+      }
+
+      const response = await this.usersModel.findOneAndUpdate(
+        { _id: authResponse._id },
+        { password: data.password },      
+        { new: true }              
+      );
+
+      return {
+        menssage: "Contraseña cambiada con exito",
+        data: [response],
+        status: 200
+      };
+
+
+    } catch (error) {
+
+      return {
+        menssage: error,
+        data: [],
+        status: 400
+      };
+
+    }
+  }
 }

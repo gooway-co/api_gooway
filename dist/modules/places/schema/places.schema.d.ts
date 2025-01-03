@@ -14,7 +14,6 @@ export declare class Places {
     mainTypology?: string;
     secondaryTypology?: string;
     advocacy: string;
-    companyId: string;
     categoryId: string;
     status: string;
     audio: string;

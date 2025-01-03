@@ -14,5 +14,4 @@ export declare class PlaceDTO {
     advocacy?: string;
     status: string;
     address: string;
-    companyId: string;
 }

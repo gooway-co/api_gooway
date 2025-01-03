@@ -11,7 +11,10 @@ export declare class EmailsService {
     constructor(usersModel: Model<UserDocument>, _otpModel: Model<OtpDocument>, mailerService: MailerService, _authService: AuthService);
     sendEmailWithOTP(subject: string, template: string, context: any, body: any): Promise<{
         menssage: string;
-        data: any[];
+        data: {
+            id: import("mongoose").Types.ObjectId;
+            email: string;
+        }[];
         status: number;
     }>;
     sendPageWeb(to: string, subject: string, template: string, context: any): Promise<{
@@ -19,7 +22,7 @@ export declare class EmailsService {
         data: any[];
         status: number;
     }>;
-    validateCodeOTP(code: string, request: any): Promise<{
+    validateCodeOTP(data: any): Promise<{
         menssage: string;
         data: import("mongoose").UpdateWriteOpResult[];
         status: number;

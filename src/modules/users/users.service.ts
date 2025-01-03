@@ -56,10 +56,9 @@ export class UsersService {
                 .findById(response._id)
                 .select('-create_at -update_at -rol -status');
 
-                console.log("filteredResponse ", filteredResponse);
 
                 return {
-                    data: filteredResponse,
+                    data: [filteredResponse],
                     menssage: "Usuario registrado con exito",
                     status: 200
                 }

@@ -18,4 +18,9 @@ export class AuthController {
     async recoverPassword(@Body() authDTO: AuthDTO){
         return await this.authService.login(authDTO);
     }
+
+    @Post('/changePassword')
+    async changePassword(@Body() body){
+        return await this.authService.changePassword(body);
+    }
 }

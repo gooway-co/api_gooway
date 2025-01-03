@@ -34,8 +34,9 @@ export class EmailsController {
     }
 
     @Post('validateCodeOTP')
-    async validateCodeOTP(@Body() body,  @Request() request) {   
-        return await this.emailSevices.validateCodeOTP(body.code, request); 
+    async validateCodeOTP(@Body() body) {  
+        console.log("estro en validateCodeOTP"); 
+        return await this.emailSevices.validateCodeOTP(body); 
     }
 
 

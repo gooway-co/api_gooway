@@ -5,4 +5,5 @@ export declare class AuthController {
     constructor(authService: AuthService);
     createPost(authDTO: AuthDTO): Promise<import("../../shared/utils/IResponse.util").IResponse>;
     recoverPassword(authDTO: AuthDTO): Promise<import("../../shared/utils/IResponse.util").IResponse>;
+    changePassword(body: any): Promise<any>;
 }

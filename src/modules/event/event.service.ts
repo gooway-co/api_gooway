@@ -113,7 +113,8 @@ export class EventsService {
         try {
             const response = await this._eventModel.find({
                 status: 'ACTIVE',
-            });
+            }).sort({ create_at: -1 });
+            
 
             if (response.length) {
                 return {

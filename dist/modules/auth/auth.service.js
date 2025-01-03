@@ -119,6 +119,31 @@ let AuthService = class AuthService {
     async validateUserByEmail(email) {
         return await this.usersModel.findOne({ email: email });
     }
+    async changePassword(data) {
+        try {
+            const authResponse = await this.usersModel.findOne({ _id: new mongoose_2.mongo.ObjectId(data.id), status: 'ACTIVE' });
+            if (authResponse == null) {
+                return {
+                    menssage: `Usuario no encontrado`,
+                    data: [],
+                    status: 400
+                };
+            }
+            const response = await this.usersModel.findOneAndUpdate({ _id: authResponse._id }, { password: data.password }, { new: true });
+            return {
+                menssage: "Contraseña cambiada con exito",
+                data: [response],
+                status: 200
+            };
+        }
+        catch (error) {
+            return {
+                menssage: error,
+                data: [],
+                status: 400
+            };
+        }
+    }
 };
 exports.AuthService = AuthService;
 exports.AuthService = AuthService = __decorate([

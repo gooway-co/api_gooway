@@ -7,37 +7,27 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
         }
         .container {
             max-width: 600px;
-            background-color: #ffffff;
+            margin: 20px auto;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            height: 90vh;
-            justify-content: space-between;
+            overflow: hidden;
         }
         .header {
-            background-color: #050530;
-            margin-bottom: 20px;
             padding: 20px;
+            text-align: center;
         }
         .header img {
             max-width: 150px;
         }
         .content {
-            margin-bottom: 20px;
             padding: 20px;
         }
-         .code {
+        .code {
             font-size: 24px;
             font-weight: bold;
             color: #e74c3c;
@@ -46,6 +36,7 @@
             border-radius: 4px;
             display: inline-block;
             margin: 20px 0;
+            text-align: center;
         }
         .content h2 {
             color: #333333;
@@ -63,20 +54,28 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <img src="https://simasoft.co/assets/images/logo-white.svg" alt="Logo">
-        </div>
-        <div class="content">
-             <h2>Verificación de Cambio de Contraseña</h2>
-            <p>Hola {{name}},</p>
-            <p>Para completar el cambio de tu contraseña, por favor utiliza el siguiente código de verificación:</p>           
-             <div class="code">{{Numero}}</div>
-            <p>Este código es válido por 5 minutos. Si no solicitaste este cambio, por favor ignora este correo electrónico.</p>
-        </div>
-        <div class="footer">
-            <p>&copy; 2024 Simasoft. Todos los derechos reservados.</p>
-        </div>
-    </div>
+    <table class="container" cellpadding="0" cellspacing="0" width="100%" role="presentation">
+        <tr>
+            <td class="header">
+                <img src="https://www.gooway.co/wp-content/uploads/2024/11/cropped-logo-gooway-150-x-150-px.png" alt="Logo">
+            </td>
+        </tr>
+        <tr>
+            <td class="content">
+                <h2>Verificación de cambio de contraseña</h2>
+                <p>Hola {{name}},</p>
+                <p>Para completar el cambio de tu contraseña, por favor utiliza el siguiente código de verificación:</p>           
+                <div class="code">{{Numero}}</div>
+                <p>Este código es válido por 5 minutos. Si no solicitaste este cambio, por favor ignora este correo electrónico.</p>
+                <p>Si no solicitaste este cambio, ignora este mensaje o <a href="mailto:soporte@gooway.co">contacta a nuestro equipo de soporte</a>.</p>
+
+            </td>
+        </tr>
+        <tr>
+            <td class="footer">
+                <p>&copy; 2024 Gooway. Todos los derechos reservados.</p>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>

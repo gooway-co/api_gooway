@@ -37,7 +37,7 @@ export class DeviceUserService {
             }
 
             const response  = await new this._deviceUserModel(deviceUserDto);
-            response.save(); 
+            await response.save(); 
 
             if(response){
 
@@ -51,9 +51,9 @@ export class DeviceUserService {
         }catch(error){
             return {
                 data: [],
-                menssage: error,
+                menssage: error.message || error,
                 status: 500
-            }
+            };
         }
 
     }
@@ -62,47 +62,66 @@ export class DeviceUserService {
 
     async sendNotificationDevice(sentNotificationDto: SentNotificationDeviceDto): Promise<any> {
         try {
-            const tokenExist = await this._deviceUserModel.find({});
-
-            console.log("tokenExist ", tokenExist);
+            const tokens = await this._deviceUserModel.find({});
     
-            if (tokenExist.length > 0) {
-                console.log("entro en el ", tokenExist);
-                for (const element of tokenExist) {
-                    // Usamos await correctamente dentro del bucle
-                    const message = {
-                        token: element.token, // Token del dispositivo
-                        notification: {
-                          title: sentNotificationDto.title, // Título de la notificación
-                          body: sentNotificationDto.body,   // Cuerpo de la notificación
-                        },
-                        data: {}, // Datos adicionales para tu app
-                    };
-                
-                    const response = await this.firebaseApp.messaging().send(message);
-                    console.log("response notification ", response);
-                }
-
+            if (tokens.length === 0) {
                 return {
                     data: [],
-                    message: "Notificaciones no enviadas",
-                    status: 400
+                    message: "No se ha encontrado token para enviar notificaciones",
+                    status: 400,
                 };
             }
-
-            return {
-                data: [],
-                message: "No se ha encontrado token para enviar notificaciones",
-                status: 400
-            };
     
-        } catch (error) {
+            const invalidTokens: string[] = [];
+    
+            for (const tokenEntry of tokens) {
+                const message = {
+                    token: tokenEntry.token, // Token del dispositivo
+                    notification: {
+                        title: sentNotificationDto.title, // Título de la notificación
+                        body: sentNotificationDto.body,   // Cuerpo de la notificación
+                    },
+                    data: {}, // Datos adicionales para tu app
+                };
+    
+                try {
+                    // Enviar la notificación
+                    const response = await this.firebaseApp.messaging().send(message);
+                    console.log("Notificación enviada con éxito: ", response);
+                } catch (error) {
+                    console.error("Error al enviar notificación: ", error);
+    
+                    // Verificar si el error es debido a un token inválido
+                    if (
+                        error.code === "messaging/registration-token-not-registered" ||
+                        error.code === "messaging/invalid-registration-token"
+                    ) {
+                        // Agregar el token inválido a la lista para eliminarlo
+                        invalidTokens.push(tokenEntry.token);
+                    }
+                }
+            }
+    
+            // Eliminar los tokens inválidos de la base de datos
+            if (invalidTokens.length > 0) {
+                await this._deviceUserModel.deleteMany({ token: { $in: invalidTokens } });
+                console.log("Tokens inválidos eliminados: ", invalidTokens);
+            }
+    
             return {
                 data: [],
-                message: error,
-                status: 500
+                message: "Notificaciones enviadas (se eliminaron tokens inválidos si los había)",
+                status: 200,
+            };
+        } catch (error) {
+            console.error("Error en sendNotificationDevice: ", error);
+            return {
+                data: [],
+                message: error.message || "Ocurrió un error al enviar notificaciones",
+                status: 500,
             };
         }
     }
+    
     
 }

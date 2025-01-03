@@ -4,7 +4,10 @@ export declare class EmailsController {
     constructor(emailSevices: EmailsService);
     sendEmailRecoveryPassword(body: any): Promise<{
         menssage: string;
-        data: any[];
+        data: {
+            id: import("mongoose").Types.ObjectId;
+            email: string;
+        }[];
         status: number;
     }>;
     sendPageWeb(body: any): Promise<{
@@ -12,14 +15,17 @@ export declare class EmailsController {
         data: any[];
         status: number;
     }>;
-    validateCodeOTP(body: any, request: any): Promise<{
+    validateCodeOTP(body: any): Promise<{
         menssage: string;
         data: import("mongoose").UpdateWriteOpResult[];
         status: number;
     }>;
     forgottenPassword(body: any, request: any): Promise<{
         menssage: string;
-        data: any[];
+        data: {
+            id: import("mongoose").Types.ObjectId;
+            email: string;
+        }[];
         status: number;
     }>;
 }

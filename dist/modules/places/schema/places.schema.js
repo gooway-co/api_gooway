@@ -72,10 +72,6 @@ __decorate([
     __metadata("design:type", String)
 ], Places.prototype, "advocacy", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ type: mongoose_2.default.Schema.Types.ObjectId, ref: 'companies', required: true }),
-    __metadata("design:type", String)
-], Places.prototype, "companyId", void 0);
-__decorate([
     (0, mongoose_1.Prop)({ type: mongoose_2.default.Schema.Types.ObjectId, ref: 'categories', required: true }),
     __metadata("design:type", String)
 ], Places.prototype, "categoryId", void 0);

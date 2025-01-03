@@ -75,7 +75,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], PlaceController.prototype, "deleteCompany", null);
 __decorate([
-    (0, common_1.Post)("/findbyCompany"),
+    (0, common_1.Get)("/listar"),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [places_dto_1.PlaceDTO]),

@@ -12,7 +12,6 @@ import {
     DeleteObjectCommand,
     DeleteObjectsCommand,
 } from '@aws-sdk/client-s3';
-import { v4 as uuidv4 } from 'uuid'; // Para generar nombres únicos de archivo
 
 @Injectable()
 export class PlaceService {
@@ -44,7 +43,7 @@ export class PlaceService {
                 Array.isArray(datos.images) &&
                 datos.images.length > 0
             ) {
-                await this.uploadImagesToS3(datos.images, datos.audio, response);
+                await this.uploadImagesToS3(datos.images, response);
             }
 
             if (response) {
@@ -110,7 +109,6 @@ export class PlaceService {
     async filterPlaceByCompany(body: any): Promise<IResponse> {
         try {
             const response = await this._placesModel.find({
-                companyId: new mongo.ObjectId(body.companyId),
                 status: 'ACTIVE',
             });
 
@@ -165,37 +163,17 @@ export class PlaceService {
         }
     }
 
+
     private async uploadImagesToS3(
         files: any[],
-        audio: any,
         responseData: any,
     ): Promise<any[]> {
     
-        let audioBuffer = `data:audio/mp3;base64,${audio}`;
-        let audioS3 = this.convertBase64ToBuffer(audioBuffer, "audio.mp3", "audio/mp3");
-    
         let arrayImages: any[] = [];
-        let audioUrl = "";
-
-        if (audio) {
-            
-            const audioKey = `places/${responseData._id}/audio/${audioS3.originalname}`;
-    
-            const audioCommand = new PutObjectCommand({
-                Bucket: this.bucketName,
-                Key: audioKey,
-                Body: audioS3.buffer, 
-                ContentType: audioS3.mimetype,
-            });
-    
-            audioUrl = await this.s3.send(audioCommand).then((response) => {
-                return `https://${this.bucketName}.s3.amazonaws.com/${audioKey}`;
-            });
-    
-           
+        if(files == null || files == undefined) {
+            return;
         }
-    
-        //Carga de imagenes
+
         const uploadPromises = files.map((file) => {
             const key = `places/${responseData._id}/img/${file.originalname}`;
     
@@ -218,7 +196,7 @@ export class PlaceService {
 
         await this._placesModel.updateOne(
             { _id: responseData._id },
-            { imagesUrl: arrayImages, audio: audioUrl  },
+            { imagesUrl: arrayImages },
         );
     
         arrayImages = [...arrayImages];    

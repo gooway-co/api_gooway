@@ -41,6 +41,7 @@ let EmailsService = class EmailsService {
         const responseOtp = await this._otpModel.find({ idUser: authResponse._id, status: "INITIAL" });
         console.log(responseOtp);
         if (responseOtp.length > 0) {
+            console.log("esponseOtp[0]._id ", responseOtp);
             return {
                 menssage: "Ya enviamos un código a tu correo. Espera el tiempo restante.",
                 data: [],
@@ -73,7 +74,7 @@ let EmailsService = class EmailsService {
         await responseInsert.save();
         return {
             menssage: "Correo Enviado",
-            data: [],
+            data: [{ id: authResponse._id, email: authResponse.email }],
             status: 200
         };
     }
@@ -97,8 +98,8 @@ let EmailsService = class EmailsService {
             status: 200
         };
     }
-    async validateCodeOTP(code, request) {
-        const authResponse = await this._authService.validateUserToken(request);
+    async validateCodeOTP(data) {
+        const authResponse = await this.usersModel.findOne({ _id: new mongoose_2.mongo.ObjectId(data.id), status: 'ACTIVE' });
         const response = await this._otpModel.findOne({ idUser: new mongoose_2.mongo.ObjectId(authResponse._id), status: "INITIAL" });
         if (response == null) {
             return {
@@ -107,8 +108,8 @@ let EmailsService = class EmailsService {
                 status: 400
             };
         }
-        if (response.code == code) {
-            const responseUpdate = await this._otpModel.updateOne({ code: code, idUser: authResponse._id }, { status: "VERIFIED" });
+        if (response.code == data.code) {
+            const responseUpdate = await this._otpModel.updateOne({ code: data.code, idUser: authResponse._id }, { status: "VERIFIED" });
             return {
                 menssage: "Código validado con exito",
                 data: [responseUpdate],
@@ -119,9 +120,9 @@ let EmailsService = class EmailsService {
             let contAttempts = response.attempts + 1;
             const responseCodeInvalid = await this._otpModel.updateOne({ idUser: authResponse._id }, { attempts: contAttempts });
             return {
-                menssage: `Código invalidos te quedan ${3 - contAttempts}  `,
+                menssage: `Código invalidos te quedan ${3 - contAttempts} intentos `,
                 data: [],
-                status: 200
+                status: 400
             };
         }
     }

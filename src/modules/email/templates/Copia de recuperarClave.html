@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificación de Cambio de Contraseña</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background-color: #050530;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+        }
+        .header img {
+            max-width: 120px;
+            margin-bottom: 10px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: normal;
+        }
+        .content {
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .content h2 {
+            color: #333333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .content p {
+            color: #555555;
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 10px 0;
+        }
+        .code {
+            display: inline-block;
+            font-size: 22px;
+            font-weight: bold;
+            color: #e74c3c;
+            background-color: #f9eaea;
+            padding: 12px 24px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-decoration: none;
+        }
+        .footer {
+            background-color: #f9f9f9;
+            padding: 20px;
+            text-align: center;
+            color: #777777;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .footer a {
+            color: #050530;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <table class="container" cellpadding="0" cellspacing="0" width="100%" role="presentation">
+        <!-- Header -->
+        <tr>
+            <td class="header">
+                <img src="https://www.gooway.co/wp-content/uploads/2024/11/cropped-logo-gooway-150-x-150-px.png" alt="Logo">
+                <h1>Solicitud de Cambio de Contraseña</h1>
+            </td>
+        </tr>
+
+        <!-- Content -->
+        <tr>
+            <td class="content">
+                <h2>Verificación de Cambio de Contraseña</h2>
+                <p>Hola <strong>{{name}}</strong>,</p>
+                <p>Para completar el cambio de tu contraseña, utiliza el siguiente código de verificación:</p>
+                <div class="code">{{Numero}}</div>
+                <p>Este código es válido por 5 minutos.</p>
+                <p>Si no solicitaste este cambio, ignora este mensaje o <a href="mailto:soporte@simasoft.co">contacta a nuestro equipo de soporte</a>.</p>
+            </td>
+        </tr>
+
+        <!-- Footer -->
+        <tr>
+            <td class="footer">
+                <p>&copy; 2024 Simasoft. Todos los derechos reservados.</p>
+                <p>¿Necesitas ayuda? Visita nuestro <a href="https://simasoft.co/soporte">Centro de Soporte</a>.</p>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

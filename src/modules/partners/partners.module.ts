@@ -3,7 +3,6 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Partners, PartnersSchema } from './schema/partners.schema';
 import { PartnerController } from './partners.controller';
 import { PartnerService } from './partners.service';
-import { AuthService } from '../auth/auth.service';
 
 @Module({
     imports:[ 

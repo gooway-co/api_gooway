@@ -35,6 +35,7 @@ export class EmailsService {
         console.log(responseOtp);
         
         if(responseOtp.length > 0) {
+            console.log("esponseOtp[0]._id ", responseOtp)
             return {
                 menssage: "Ya enviamos un código a tu correo. Espera el tiempo restante.",
                 data: [],
@@ -74,7 +75,7 @@ export class EmailsService {
 
         return {
             menssage: "Correo Enviado",
-            data: [],
+            data: [{id: authResponse._id, email: authResponse.email}],
             status: 200
         };
     }
@@ -103,9 +104,10 @@ export class EmailsService {
         };
     }
 
-    async validateCodeOTP(code: string, request: any) {
+    async validateCodeOTP(data: any) {
 
-        const authResponse = await this._authService.validateUserToken(request);
+        //const authResponse = await this._authService.validateUserToken(request);
+        const authResponse = await this.usersModel.findOne({_id: new mongo.ObjectId(data.id), status: 'ACTIVE'});
         const response = await this._otpModel.findOne({  idUser:  new mongo.ObjectId(authResponse._id), status: "INITIAL"});
 
         if(response == null) {
@@ -116,8 +118,8 @@ export class EmailsService {
             };
         }
 
-        if(response.code == code) {
-            const responseUpdate = await this._otpModel.updateOne({ code: code, idUser:  authResponse._id}, {status: "VERIFIED"});
+        if(response.code == data.code) {
+            const responseUpdate = await this._otpModel.updateOne({ code: data.code, idUser:  authResponse._id}, {status: "VERIFIED"});
             return {
                 menssage: "Código validado con exito",
                 data: [responseUpdate],
@@ -128,9 +130,9 @@ export class EmailsService {
             let contAttempts = response.attempts + 1;
             const responseCodeInvalid = await this._otpModel.updateOne({ idUser:  authResponse._id}, {attempts: contAttempts});
             return {
-                menssage: `Código invalidos te quedan ${ 3 - contAttempts}  `,
+                menssage: `Código invalidos te quedan ${ 3 - contAttempts} intentos `,
                 data: [],
-                status: 200
+                status: 400
             };
         }    
     }

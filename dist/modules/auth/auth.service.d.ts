@@ -23,4 +23,5 @@ export declare class AuthService {
     } & {
         __v: number;
     }>;
+    changePassword(data: any): Promise<any>;
 }
