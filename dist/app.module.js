@@ -22,6 +22,7 @@ const event_module_1 = require("./modules/event/event.module");
 const device_user_module_1 = require("./modules/device-user/device-user.module");
 const cities_module_1 = require("./modules/cities/cities.module");
 const email_module_1 = require("./modules/email/email.module");
+const categories_module_2 = require("./modules/categories-places/categories.module");
 const ENV = process.env.NODE_ENV;
 let AppModule = class AppModule {
 };
@@ -43,6 +44,7 @@ exports.AppModule = AppModule = __decorate([
             event_module_1.EventModule,
             device_user_module_1.DeviceUserModule,
             cities_module_1.CitiesModule,
+            categories_module_2.CategoryPlaceModule,
             email_module_1.EmailsModule
         ],
         controllers: [app_controller_1.AppController],

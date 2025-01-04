@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Categories, CategoriesSchema } from './schema/categories.schema';
+import { CategoriesPlace, CategoriesPlaceSchema } from './schema/categories.schema';
 import { CategoriController } from './categories.controller';
 import { CategoriService } from './categories.service';
 import { AwsS3Module } from '../aws/aws-s3.module';
@@ -9,7 +9,7 @@ import { AwsS3Module } from '../aws/aws-s3.module';
 @Module({
     imports:[ 
         MongooseModule.forFeature([
-            { name: Categories.name, schema: CategoriesSchema },
+            { name: CategoriesPlace.name, schema: CategoriesPlaceSchema },
         ]),
         AwsS3Module
     ],
@@ -17,4 +17,4 @@ import { AwsS3Module } from '../aws/aws-s3.module';
     providers: [CategoriService]
 
 })
-export class CategoriModule {}
+export class CategoryPlaceModule {}

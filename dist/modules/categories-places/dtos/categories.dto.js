@@ -9,38 +9,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CategoriDTO = void 0;
+exports.CategoryPlaceDTO = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const class_validator_1 = require("class-validator");
-class CategoriDTO {
+class CategoryPlaceDTO {
 }
-exports.CategoriDTO = CategoriDTO;
+exports.CategoryPlaceDTO = CategoryPlaceDTO;
 __decorate([
     (0, mongoose_1.Prop)({ required: false }),
     __metadata("design:type", String)
-], CategoriDTO.prototype, "name", void 0);
+], CategoryPlaceDTO.prototype, "name", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ required: false }),
     __metadata("design:type", String)
-], CategoriDTO.prototype, "image", void 0);
+], CategoryPlaceDTO.prototype, "image", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], CategoriDTO.prototype, "description", void 0);
+], CategoryPlaceDTO.prototype, "description", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ required: false }),
     __metadata("design:type", String)
-], CategoriDTO.prototype, "code", void 0);
+], CategoryPlaceDTO.prototype, "code", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ required: false }),
     __metadata("design:type", String)
-], CategoriDTO.prototype, "status", void 0);
+], CategoryPlaceDTO.prototype, "status", void 0);
 __decorate([
     (0, mongoose_1.Prop)((0, mongoose_1.raw)({
         key: { type: String },
         url: { type: String }
     })),
     __metadata("design:type", Object)
-], CategoriDTO.prototype, "file", void 0);
+], CategoryPlaceDTO.prototype, "file", void 0);
 //# sourceMappingURL=categories.dto.js.map

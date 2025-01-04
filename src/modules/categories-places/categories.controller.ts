@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post, Delete, Put, UseGuards, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { CategoriService } from './categories.service';
-import { CategoriDTO } from './dtos/categories.dto';
+import { CategoryPlaceDTO } from './dtos/categories.dto';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 
 
@@ -11,18 +11,16 @@ export class CategoriController {
     ){}
 
     //@UseGuards(AuthGuard)
-    @UseInterceptors(FileInterceptor('image'))
     @Post("/create")
-    async createCategori(@Body() categoriDTO: CategoriDTO, @UploadedFile() file: Express.Multer.File) {
-
-        categoriDTO.file = file;
-        return await this._categoriesService.createCategori(categoriDTO, categoriDTO.file);
+    async createCategori(@Body() CategoryPlaceDTO: CategoryPlaceDTO,) {
+        console.log("category place");
+        return await this._categoriesService.createCategory(CategoryPlaceDTO);
     }
 
     //@UseGuards(AuthGuard)
     @Put("/update/:IdCategori")
-    async updateCompany (@Body() categoriDTO: CategoriDTO,@Param('IdCategori') IdCategori) { 
-        return await this._categoriesService.update(categoriDTO, IdCategori);
+    async updateCompany (@Body() CategoryPlaceDTO: CategoryPlaceDTO,@Param('IdCategori') IdCategori) { 
+        return await this._categoriesService.update(CategoryPlaceDTO, IdCategori);
     }
 
     @Delete("/delete/:IdCategori")

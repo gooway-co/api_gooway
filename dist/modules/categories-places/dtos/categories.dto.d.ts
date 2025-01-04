@@ -1,4 +1,4 @@
-export declare class CategoriDTO {
+export declare class CategoryPlaceDTO {
     name: string;
     image: string;
     description: string;

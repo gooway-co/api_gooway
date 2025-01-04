@@ -9,34 +9,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CategoriesSchema = exports.Categories = void 0;
+exports.CategoriesPlaceSchema = exports.CategoriesPlace = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const class_validator_1 = require("class-validator");
-let Categories = class Categories {
+let CategoriesPlace = class CategoriesPlace {
 };
-exports.Categories = Categories;
+exports.CategoriesPlace = CategoriesPlace;
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], Categories.prototype, "name", void 0);
+], CategoriesPlace.prototype, "name", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ required: false }),
     __metadata("design:type", String)
-], Categories.prototype, "image", void 0);
-__decorate([
-    (0, mongoose_1.Prop)({ required: false }),
-    __metadata("design:type", String)
-], Categories.prototype, "description", void 0);
+], CategoriesPlace.prototype, "description", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], Categories.prototype, "code", void 0);
+], CategoriesPlace.prototype, "code", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
-], Categories.prototype, "status", void 0);
+], CategoriesPlace.prototype, "status", void 0);
 __decorate([
     (0, mongoose_1.Prop)({
         default: Date.now,
@@ -48,14 +44,14 @@ __decorate([
         }
     }),
     __metadata("design:type", Date)
-], Categories.prototype, "expire", void 0);
-exports.Categories = Categories = __decorate([
+], CategoriesPlace.prototype, "expire", void 0);
+exports.CategoriesPlace = CategoriesPlace = __decorate([
     (0, mongoose_1.Schema)({
         timestamps: {
             createdAt: 'create_at',
             updatedAt: 'update_at'
         }
     })
-], Categories);
-exports.CategoriesSchema = mongoose_1.SchemaFactory.createForClass(Categories);
+], CategoriesPlace);
+exports.CategoriesPlaceSchema = mongoose_1.SchemaFactory.createForClass(CategoriesPlace);
 //# sourceMappingURL=categories.schema.js.map

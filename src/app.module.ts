@@ -13,6 +13,7 @@ import { EventModule } from './modules/event/event.module';
 import { DeviceUserModule } from './modules/device-user/device-user.module';
 import { CitiesModule } from './modules/cities/cities.module';
 import { EmailsModule } from './modules/email/email.module';
+import { CategoryPlaceModule } from './modules/categories-places/categories.module';
 
 const ENV = process.env.NODE_ENV;
 
@@ -32,6 +33,7 @@ const ENV = process.env.NODE_ENV;
     EventModule,
     DeviceUserModule,
     CitiesModule,
+    CategoryPlaceModule,
     EmailsModule
   ],
   controllers: [AppController],

@@ -25,13 +25,12 @@ let CategoriService = class CategoriService {
         this.s3 = s3;
         this.bucketName = process.env.AWS_S3_BUCKET_NAME;
     }
-    async createCategori(categoriesDTO, file) {
+    async createCategory(categoriesDTO) {
         try {
             categoriesDTO.status = status_constant_1.CONSTANTS_STATUS.ACTIVE;
             const response = await new this._categoriesModel(categoriesDTO);
             response.save();
             if (response) {
-                await this.uploadImagesToS3(file, response);
                 return {
                     data: response,
                     menssage: "Categoria creada con exito",
@@ -177,7 +176,7 @@ let CategoriService = class CategoriService {
 exports.CategoriService = CategoriService;
 exports.CategoriService = CategoriService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, mongoose_2.InjectModel)(categories_schema_1.Categories.name)),
+    __param(0, (0, mongoose_2.InjectModel)(categories_schema_1.CategoriesPlace.name)),
     __metadata("design:paramtypes", [mongoose_1.Model,
         client_s3_1.S3Client])
 ], CategoriService);

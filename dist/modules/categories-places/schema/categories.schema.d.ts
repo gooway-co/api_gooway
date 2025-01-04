@@ -1,18 +1,17 @@
 import mongoose from "mongoose";
-export type CategoriesDocument = Categories & Document;
-export declare class Categories {
+export type CategoriesPlaceDocument = CategoriesPlace & Document;
+export declare class CategoriesPlace {
     name: string;
-    image: string;
     description: string;
     code: string;
     status: string;
     expire: Date;
 }
-export declare const CategoriesSchema: mongoose.Schema<Categories, mongoose.Model<Categories, any, any, any, mongoose.Document<unknown, any, Categories> & Categories & {
+export declare const CategoriesPlaceSchema: mongoose.Schema<CategoriesPlace, mongoose.Model<CategoriesPlace, any, any, any, mongoose.Document<unknown, any, CategoriesPlace> & CategoriesPlace & {
     _id: mongoose.Types.ObjectId;
 } & {
     __v: number;
-}, any>, {}, {}, {}, {}, mongoose.DefaultSchemaOptions, Categories, mongoose.Document<unknown, {}, mongoose.FlatRecord<Categories>> & mongoose.FlatRecord<Categories> & {
+}, any>, {}, {}, {}, {}, mongoose.DefaultSchemaOptions, CategoriesPlace, mongoose.Document<unknown, {}, mongoose.FlatRecord<CategoriesPlace>> & mongoose.FlatRecord<CategoriesPlace> & {
     _id: mongoose.Types.ObjectId;
 } & {
     __v: number;

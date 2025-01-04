@@ -6,26 +6,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CategoriModule = void 0;
+exports.CategoryPlaceModule = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const categories_schema_1 = require("./schema/categories.schema");
 const categories_controller_1 = require("./categories.controller");
 const categories_service_1 = require("./categories.service");
 const aws_s3_module_1 = require("../aws/aws-s3.module");
-let CategoriModule = class CategoriModule {
+let CategoryPlaceModule = class CategoryPlaceModule {
 };
-exports.CategoriModule = CategoriModule;
-exports.CategoriModule = CategoriModule = __decorate([
+exports.CategoryPlaceModule = CategoryPlaceModule;
+exports.CategoryPlaceModule = CategoryPlaceModule = __decorate([
     (0, common_1.Module)({
         imports: [
             mongoose_1.MongooseModule.forFeature([
-                { name: categories_schema_1.Categories.name, schema: categories_schema_1.CategoriesSchema },
+                { name: categories_schema_1.CategoriesPlace.name, schema: categories_schema_1.CategoriesPlaceSchema },
             ]),
             aws_s3_module_1.AwsS3Module
         ],
         controllers: [categories_controller_1.CategoriController],
         providers: [categories_service_1.CategoriService]
     })
-], CategoriModule);
+], CategoryPlaceModule);
 //# sourceMappingURL=categories.module.js.map

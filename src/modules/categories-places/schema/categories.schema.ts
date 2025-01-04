@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { IsNotEmpty } from "class-validator";
 import mongoose from "mongoose";
-export type CategoriesDocument = Categories & Document;
+export type CategoriesPlaceDocument = CategoriesPlace & Document;
 
 @Schema({
     timestamps: {
@@ -9,14 +9,12 @@ export type CategoriesDocument = Categories & Document;
         updatedAt: 'update_at'
     }  
 })
-export class Categories {
+export class CategoriesPlace {
 
     @Prop({ required: true })
     @IsNotEmpty()
     name: string;
 
-    @Prop({ required: false }) 
-    image: string;
 
     @Prop({ required: false })
     description: string
@@ -39,4 +37,4 @@ export class Categories {
     })
     expire: Date;
 }
-export const CategoriesSchema = SchemaFactory.createForClass(Categories);
+export const CategoriesPlaceSchema = SchemaFactory.createForClass(CategoriesPlace);

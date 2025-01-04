@@ -1,2 +1,2 @@
-export declare class CategoriModule {
+export declare class CategoryPlaceModule {
 }

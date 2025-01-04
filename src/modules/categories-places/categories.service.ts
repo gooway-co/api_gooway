@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { CategoriDTO } from './dtos/categories.dto';
-import { Categories, CategoriesDocument } from './schema/categories.schema';
+import { CategoryPlaceDTO } from './dtos/categories.dto';
+import { CategoriesPlace, CategoriesPlaceDocument } from './schema/categories.schema';
 import { Model, mongo } from "mongoose";
 import { InjectModel } from "@nestjs/mongoose";
 import { CONSTANTS_STATUS } from 'src/shared/utils/status.constant';
@@ -19,13 +19,13 @@ export class CategoriService {
     private readonly bucketName: string;
 
     constructor(
-        @InjectModel(Categories.name) private _categoriesModel: Model<CategoriesDocument>,
+        @InjectModel(CategoriesPlace.name) private _categoriesModel: Model<CategoriesPlaceDocument>,
         private readonly s3: S3Client,
     ){ 
         this.bucketName = process.env.AWS_S3_BUCKET_NAME;
     }
 
-    async createCategori(categoriesDTO: CategoriDTO, file : any):Promise<any> {
+    async createCategory(categoriesDTO: CategoryPlaceDTO):Promise<any> {
 
         try{
 
@@ -34,8 +34,6 @@ export class CategoriService {
             response.save(); 
 
             if(response){
-
-                await this.uploadImagesToS3(file, response);
 
                 return {
                     data: response,
@@ -54,7 +52,7 @@ export class CategoriService {
 
     }
 
-    async update(categoriesDTO: CategoriDTO, idCategori): Promise<IResponse> {
+    async update(categoriesDTO: CategoryPlaceDTO, idCategori): Promise<IResponse> {
         const response =  await this._categoriesModel.findByIdAndUpdate(idCategori,
             categoriesDTO, { new: true });
             if (response?._id) {
